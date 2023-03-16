@@ -16,10 +16,12 @@ public class UserService {
     private UserMapper userMapper;
     /**
      * ユーザー情報検索
-　　　* @param userSearchRequest リクエストデータ
+　　　	　* @param userSearchRequest リクエストデータ
      * @return 検索結果
+     * コントローラークラスから呼び出される
      */
     public User search(UserSearchRequest userSearchRequest) {
-        return userMapper.search(userSearchRequest);
+        // マッパーにフォームで入力された値を渡す。返ってきた値をコントローラーに返す
+    	return userMapper.search(userSearchRequest);
     }
 }

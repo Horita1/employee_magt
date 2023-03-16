@@ -24,9 +24,13 @@ public class UserController {
    * @param model Model
    * @return ユーザー情報一覧画面
    */
-  @GetMapping(value = "/user/search")
+  //user/searchにアクセスすると処理が実行される
+  @GetMapping(value = "/user/search") 
+  // モデルクラスはコントローラーからビューに変数を渡す
   public String displaySearch(Model model) {
+	// search.htmlにuserSearchRequestという変数名で、UserSerchRequestクラスを渡す  
     model.addAttribute("userSearchRequest", new UserSearchRequest());
+    // 変数を渡すhtmlの指定
     return "user/search";
   }
   /**
@@ -35,10 +39,15 @@ public class UserController {
    * @param model Model
    * @return ユーザー情報一覧画面
    */
+  // POSTでアクセスされたリクエストを処理する
   @RequestMapping(value = "/user/id_search", method = RequestMethod.POST)
+  // @ModelAttribute リクエストからきたフォームのデータを受け取る
   public String search(@ModelAttribute UserSearchRequest userSearchRequest, Model model) {
-    User user = userService.search(userSearchRequest);
+    // 入力された値を元にユーザーを検索し、取得するserviceクラスを実行
+	User user = userService.search(userSearchRequest);
+    // htmlにuserinfoという変数名でuserを渡す
     model.addAttribute("userinfo", user);
+    // 変数を渡すhtmlを指定
     return "user/search";
   }
 }
